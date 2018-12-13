@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router';
-import { Link } from 'react-router-dom'
+import React from 'react';
 
 import Header from './components/Header';
-import logo from './logo.svg';
-// import './App.css';
 import Main from './Main';
 
 

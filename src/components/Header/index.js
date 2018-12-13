@@ -1,0 +1,78 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import styled from 'styled-components';
+
+import ProfileMenu from '../ProfileMenu';
+
+
+class Header extends Component {
+  render() {
+    return (
+      <HeaderContainer>
+        <HeaderName>
+          <Logo>Positive Bets</Logo>
+          <Slogan>Make bets is easy as posible</Slogan>
+        </HeaderName>
+        <HeaderMenu>
+          <MainMenu>
+            <HeaderLink to="/">
+              Home
+            </HeaderLink>
+            <HeaderLink to="/games">
+              Games
+            </HeaderLink>
+            <HeaderLink to="/schedule">
+              Schedule
+            </HeaderLink>
+          </MainMenu>
+          <ProfileMenu />
+        </HeaderMenu>
+      </HeaderContainer>
+    )
+  }
+}
+
+const HeaderContainer = styled.div`
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  background: #376f9a;
+  color: white;
+`;
+
+const HeaderLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+`;
+
+const HeaderMenu = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const MainMenu = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+const HeaderName = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Logo = styled.div`
+  font-size: 2.5rem;
+`;
+
+const Slogan = styled.div`
+  display: flex;
+  align-self: flex-start;
+  font-size: 1rem;
+`;
+
+export default withRouter(Header)

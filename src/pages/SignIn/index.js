@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import gql from "graphql-tag";
+import { Mutation, graphql } from "react-apollo";
+import Cookie from 'js-cookie';
 
 import Button from '../../components/common/Button';
 
@@ -39,23 +42,65 @@ const ButtonContainer = styled.div`
   margin-top: 1rem;
 `;
 
-export default () => (
-  <PageContainer>
-    <CardContainer>
-      <CardHeader>Sign In</CardHeader>
-      <CardContent>
-        <div>
-          <p>email or username</p>
-          <input type="text" />
-        </div>
-        <div>
-          <p>password</p>
-          <input type="password" />
-        </div>
-        <ButtonContainer>
-          <Button>Sign In</Button>
-        </ButtonContainer>
-      </CardContent>
-    </CardContainer>
-  </PageContainer>
-);
+const signInMutation = gql`
+  mutation ($username: String!, $password: String!) {
+    signIn(login: $username, password: $password) {
+      token
+    }
+  }
+`;
+
+class SignIn extends Component { 
+
+  state = {
+    username: '',
+    password: '',
+  }
+
+  handleOnChange = type => e => {
+    this.setState({ [type]: e.target.value });
+  }
+
+  handleOnSignIn = () => {
+    const { mutate } = this.props;
+    const { username, password } = this.state;
+    mutate({
+      variables: {
+        username,
+        password,
+      }
+    }).then(result => {
+      const { data: { signIn } } = result;
+      Cookie.set('token', signIn.token)
+    }).catch(error => {
+      console.log('>>>> mutate error: ', { error });
+    });
+  }
+
+  render() {
+    const { username, password } = this.state;
+
+    return (
+      <PageContainer>
+        <CardContainer>
+          <CardHeader>Sign In</CardHeader>
+          <CardContent>
+            <div>
+              <p>email or username</p>
+              <input type="text" value={username} onChange={this.handleOnChange('username')} />
+            </div>
+            <div>
+              <p>password</p>
+              <input type="password" value={password} onChange={this.handleOnChange('password')}/>
+            </div>
+            <ButtonContainer>
+              <Button onClick={this.handleOnSignIn}>Sign In</Button>
+            </ButtonContainer>
+          </CardContent>
+        </CardContainer>
+      </PageContainer>
+    );
+  }
+}
+
+export default graphql(signInMutation)(SignIn);

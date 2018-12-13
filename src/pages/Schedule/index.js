@@ -17,6 +17,7 @@ const Messages = () => (
     query={gql`
       {
         messages {
+          id
           text
           createdAt
         }
@@ -26,8 +27,8 @@ const Messages = () => (
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>
       if (error) return <p>Error...</p>
-      return data.messages.map(({ text, createdAt }) => (
-        <MessageContainer>
+      return data.messages.map(({ id, text, createdAt }) => (
+        <MessageContainer key={id}>
           <p>{text}</p>
           <p>{createdAt}</p>
         </MessageContainer>

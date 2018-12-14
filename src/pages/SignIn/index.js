@@ -46,6 +46,11 @@ const signInMutation = gql`
   mutation ($username: String!, $password: String!) {
     signIn(login: $username, password: $password) {
       token
+      me {
+        id
+        username
+        email
+      }
     }
   }
 `;
@@ -71,6 +76,7 @@ class SignIn extends Component {
       }
     }).then(result => {
       const { data: { signIn } } = result;
+      console.log('>>>> mutate result: ', { result });
       Cookie.set('token', signIn.token)
     }).catch(error => {
       console.log('>>>> mutate error: ', { error });

@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router';
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import Header from './components/Header';
-import logo from './logo.svg';
-// import './App.css';
-import Main from './Main';
+import Routes from './Routes';
+import { GET_ME } from './graphql/queries';
 
 
 const App = () => (
-  <div>
-    <Header />
-    <Main />
-  </div>
-)
+  <Query query={GET_ME} fetchPolicy="network-only">
+    {({ client, loading, data: { me } }) => {
+      return (
+        <div>
+          <Header me={me} />
+          <Routes me={me} />
+        </div>
+      );
+    }}
+  </Query>
+);
 
 export default App;

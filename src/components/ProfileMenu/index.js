@@ -4,9 +4,22 @@ import { withRouter } from 'react-router';
 import styled from 'styled-components';
 
 
-
 class ProfileMenu extends Component {
   render() {
+    const { me } = this.props;
+    const handleLogout = () => {
+      console.log('>>> ProfileMenu logout');
+    }
+    if (me) {
+      return (
+        <ProfileContainer>
+          <HeaderElement
+            onClick={handleLogout}>
+            Logout
+          </HeaderElement>
+        </ProfileContainer>
+      )
+    }
     return (
       <ProfileContainer>
         <HeaderLink to="/sign-in">Sing In</HeaderLink>
@@ -27,6 +40,16 @@ const HeaderLink = styled(Link)`
   text-decoration: none;
   font-size: 1rem;
   padding: 0.5rem;
+`;
+
+const HeaderElement = styled.span`
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const HeaderMenu = styled.div`

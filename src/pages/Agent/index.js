@@ -11,9 +11,9 @@ function Topic({ match }) {
 }
 
 
-const Games = ({ match, me }) => (
+const Agent = ({ match }) => (
     <div>
-      <h2>Topics {me && me.username} </h2>
+      <h2>Agent</h2>
       {console.log('>>> match.url: ', { match, location: window.location.pathname })}
       <ul>
         <li>
@@ -36,4 +36,4 @@ const Games = ({ match, me }) => (
     </div>
 );
 
-export default Games;
+export default Agent;

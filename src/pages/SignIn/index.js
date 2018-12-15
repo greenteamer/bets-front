@@ -29,19 +29,15 @@ class SignIn extends Component {
         username,
         password,
       },
-      // update: (cache, result) => {
-      //   console.log('>>> update: ', { cache, result });
-      //   const { data: { signIn: { me } } } = result;
-      //   // const { me } = cache.readQuery({ query: GET_ME });
-      //   cache.writeQuery({
-      //     query: GET_ME,
-      //     data: { me },
-      //   });
-      // }
+      update: (cache, result) => {
+        const { data: { signIn: { me } } } = result;
+        cache.writeQuery({
+          query: GET_ME,
+          data: { me },
+        });
+      }
     }).then(result => {
       const { data: { signIn: { token, me } } } = result;
-      console.log('>>>> mutate result: ', { token, me });
-      // updateUserInfo(me);
       Cookie.set('token', token)
       this.props.history.push('/games');
     }).catch(error => {

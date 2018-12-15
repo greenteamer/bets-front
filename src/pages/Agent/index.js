@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
 
-import SecureWrapper from '../../wrappers/SecureWrapper';
-
 
 function Topic({ match }) {
   return (
@@ -38,4 +36,4 @@ const Agent = ({ match }) => (
     </div>
 );
 
-export default SecureWrapper(Agent);
+export default Agent;

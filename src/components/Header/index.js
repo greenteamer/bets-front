@@ -9,7 +9,7 @@ import { appConsumerWrapper } from '../../wrappers/AppStore';
 
 class Header extends Component {
   render() {
-    const { me, user } = this.props;
+    const { me } = this.props;
     return (
       <HeaderContainer>
         <HeaderName>

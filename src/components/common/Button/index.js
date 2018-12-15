@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 export default styled.div`
@@ -10,6 +10,10 @@ export default styled.div`
   box-shadow: 1px 2px 20px rgba(0,0,0,0.1);
   border-radius: 10rem;
   padding: 0.5rem 2rem;
+  ${props => props.primary && css`
+    background: #376f9a;
+    color: white;
+  `};
   &:hover {
     cursor: pointer;
     box-shadow: 1px 2px 20px rgba(0,0,0,0.2);

@@ -4,10 +4,12 @@ import { withRouter } from 'react-router';
 import styled from 'styled-components';
 
 import ProfileMenu from '../ProfileMenu';
+import { appConsumerWrapper } from '../../wrappers/AppStore';
 
 
 class Header extends Component {
   render() {
+    const { me, user } = this.props;
     return (
       <HeaderContainer>
         <HeaderName>
@@ -22,11 +24,14 @@ class Header extends Component {
             <HeaderLink to="/games">
               Games
             </HeaderLink>
+            <HeaderLink to="/agent">
+              Agent
+            </HeaderLink>
             <HeaderLink to="/schedule">
               Schedule
             </HeaderLink>
           </MainMenu>
-          <ProfileMenu />
+          <ProfileMenu me={me} />
         </HeaderMenu>
       </HeaderContainer>
     )
@@ -75,4 +80,4 @@ const Slogan = styled.div`
   font-size: 1rem;
 `;
 
-export default withRouter(Header)
+export default withRouter(appConsumerWrapper(Header))

@@ -5,7 +5,78 @@ import { Mutation, graphql } from "react-apollo";
 import Cookie from 'js-cookie';
 
 import Button from '../../components/common/Button';
+import { appConsumerWrapper } from '../../wrappers/AppStore';
+import { SIGN_IN } from '../../graphql/mutations';
+import { GET_ME } from '../../graphql/queries';
 
+
+class SignIn extends Component { 
+
+  state = {
+    username: '',
+    password: '',
+  }
+
+  handleOnChange = type => e => {
+    this.setState({ [type]: e.target.value });
+  }
+
+  handleOnSignIn = () => {
+    const { mutate, updateUserInfo } = this.props;
+    const { username, password } = this.state;
+    mutate({
+      variables: {
+        username,
+        password,
+      },
+      // update: (cache, result) => {
+      //   console.log('>>> update: ', { cache, result });
+      //   const { data: { signIn: { me } } } = result;
+      //   // const { me } = cache.readQuery({ query: GET_ME });
+      //   cache.writeQuery({
+      //     query: GET_ME,
+      //     data: { me },
+      //   });
+      // }
+    }).then(result => {
+      const { data: { signIn: { token, me } } } = result;
+      console.log('>>>> mutate result: ', { token, me });
+      // updateUserInfo(me);
+      Cookie.set('token', token)
+      this.props.history.push('/games');
+    }).catch(error => {
+      console.log('>>>> mutate error: ', { error });
+    });
+  }
+
+  render() {
+    const { username, password } = this.state;
+    const { user, updateUserInfo } = this.props;
+
+    return (
+      <PageContainer>
+        <CardContainer>
+          <CardHeader>Sign In</CardHeader>
+          <CardContent>
+            <div>
+              <p>email or username</p>
+              <input type="text" value={username} onChange={this.handleOnChange('username')} />
+            </div>
+            <div>
+              <p>password</p>
+              <input type="password" value={password} onChange={this.handleOnChange('password')}/>
+            </div>
+            <ButtonContainer>
+              <Button onClick={this.handleOnSignIn} primary>Sign In</Button>
+            </ButtonContainer>
+          </CardContent>
+        </CardContainer>
+      </PageContainer>
+    );
+  }
+}
+
+export default graphql(SIGN_IN)(appConsumerWrapper(SignIn));
 
 const PageContainer = styled.div`
   display: flex;
@@ -41,72 +112,3 @@ const CardHeader = styled.h1`
 const ButtonContainer = styled.div`
   margin-top: 1rem;
 `;
-
-const signInMutation = gql`
-  mutation ($username: String!, $password: String!) {
-    signIn(login: $username, password: $password) {
-      token
-      me {
-        id
-        username
-        email
-      }
-    }
-  }
-`;
-
-class SignIn extends Component { 
-
-  state = {
-    username: '',
-    password: '',
-  }
-
-  handleOnChange = type => e => {
-    this.setState({ [type]: e.target.value });
-  }
-
-  handleOnSignIn = () => {
-    const { mutate } = this.props;
-    const { username, password } = this.state;
-    mutate({
-      variables: {
-        username,
-        password,
-      }
-    }).then(result => {
-      const { data: { signIn } } = result;
-      console.log('>>>> mutate result: ', { result });
-      Cookie.set('token', signIn.token)
-    }).catch(error => {
-      console.log('>>>> mutate error: ', { error });
-    });
-  }
-
-  render() {
-    const { username, password } = this.state;
-
-    return (
-      <PageContainer>
-        <CardContainer>
-          <CardHeader>Sign In</CardHeader>
-          <CardContent>
-            <div>
-              <p>email or username</p>
-              <input type="text" value={username} onChange={this.handleOnChange('username')} />
-            </div>
-            <div>
-              <p>password</p>
-              <input type="password" value={password} onChange={this.handleOnChange('password')}/>
-            </div>
-            <ButtonContainer>
-              <Button onClick={this.handleOnSignIn}>Sign In</Button>
-            </ButtonContainer>
-          </CardContent>
-        </CardContainer>
-      </PageContainer>
-    );
-  }
-}
-
-export default graphql(signInMutation)(SignIn);

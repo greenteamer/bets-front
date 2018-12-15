@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
+import Cookie from 'js-cookie';
+import { graphql } from "react-apollo";
+import { GET_ME } from '../../graphql/queries'
 
 
 class ProfileMenu extends Component {
   render() {
     const { me } = this.props;
     const handleLogout = () => {
-      console.log('>>> ProfileMenu logout');
+      Cookie.remove('token');
+      const { data: { refetch } } = this.props;
+      refetch();
     }
     if (me) {
       return (
@@ -73,4 +78,4 @@ const Slogan = styled.div`
   font-size: 1rem;
 `;
 
-export default withRouter(ProfileMenu)
+export default withRouter(graphql(GET_ME)(ProfileMenu))

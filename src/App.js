@@ -10,6 +10,7 @@ import { GET_ME } from './graphql/queries';
 const App = () => (
   <Query query={GET_ME} fetchPolicy="network-only">
     {({ client, loading, data: { me } }) => {
+      console.log('*** App *** me: ', { me });
       return (
         <div>
           <Header me={me} />

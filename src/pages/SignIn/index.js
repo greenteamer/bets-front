@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import gql from "graphql-tag";
-import { Mutation, graphql } from "react-apollo";
+import { graphql } from "react-apollo";
 import Cookie from 'js-cookie';
 
 import Button from '../../components/common/Button';
@@ -22,7 +21,7 @@ class SignIn extends Component {
   }
 
   handleOnSignIn = () => {
-    const { mutate, updateUserInfo } = this.props;
+    const { mutate } = this.props;
     const { username, password } = this.state;
     mutate({
       variables: {
@@ -31,6 +30,7 @@ class SignIn extends Component {
       },
       update: (cache, result) => {
         const { data: { signIn: { me } } } = result;
+        console.log('>>> sign in update: ', { me });
         cache.writeQuery({
           query: GET_ME,
           data: { me },
@@ -47,7 +47,6 @@ class SignIn extends Component {
 
   render() {
     const { username, password } = this.state;
-    const { user, updateUserInfo } = this.props;
 
     return (
       <PageContainer>

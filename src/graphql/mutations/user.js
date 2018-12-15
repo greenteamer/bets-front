@@ -9,6 +9,7 @@ export const SIGN_IN = gql`
         id
         username
         email
+        role
       }
     }
   }

@@ -21,8 +21,8 @@ class Header extends Component {
             <HeaderLink to="/">
               Home
             </HeaderLink>
-            <HeaderLink to="/games">
-              Games
+            <HeaderLink to="/admin">
+              Admin
             </HeaderLink>
             <HeaderLink to="/agent">
               Agent

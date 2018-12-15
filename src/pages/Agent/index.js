@@ -1,23 +1,23 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
 
+import PlayersList from './PlayersList';
 
-function Topic({ match }) {
-  return (
-    <div>
-      <h3>{match.params.topicId}</h3>
-    </div>
-  );
-}
 
+// function Topic({ match }) {
+//   return (
+//     <div>
+//       <h3>{match.params.topicId}</h3>
+//     </div>
+//   );
+// }
 
 const Agent = ({ match }) => (
     <div>
-      <h2>Agent</h2>
-      {console.log('>>> match.url: ', { match, location: window.location.pathname })}
+      <h2>Agent Panel</h2>
       <ul>
         <li>
-          <Link to={`${match.url}/rendering`}>Rendering with React</Link>
+          <Link to={`${match.url}/players`}>players</Link>
         </li>
         <li>
           <Link to={`${match.url}/components`}>Components</Link>
@@ -27,11 +27,12 @@ const Agent = ({ match }) => (
         </li>
       </ul>
 
-      <Route path={`${match.path}/:topicId`} component={Topic} />
+      {/* <Route path={`${match.path}/:topicId`} component={Topic} /> */}
+      <Route path={`${match.path}/players`} component={PlayersList} />
       <Route
         exact
         path={match.path}
-        render={() => <h3>Please select a topic.</h3>}
+        render={() => <h3>Please select a page.</h3>}
       />
     </div>
 );

@@ -1,2 +1,2 @@
-export { SIGN_IN } from './user';
+export { SIGN_IN, SIGN_UP } from './user';
 

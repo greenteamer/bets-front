@@ -7,11 +7,13 @@ export const SIGN_IN = gql`
       token
       me {
         id
+        agentId
         username
         email
         role
         players {
           id
+          agentId
           email
           username
           role
@@ -23,12 +25,13 @@ export const SIGN_IN = gql`
 
 
 export const SIGN_UP = gql`
-  mutation ($username: String!, $email: String!, $password: String!, $role: String!) {
-    signUp(username: $username, email: $email, password: $password, role: $role) {
+  mutation ($username: String!, $email: String!, $password: String!, $role: String!, $agentId: ID) {
+    signUp(username: $username, email: $email, password: $password, role: $role, agentId: $agentId) {
       id
       username
       email
       role
+      agentId
     }
   }
 `;

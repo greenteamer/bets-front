@@ -30,6 +30,7 @@ class SignIn extends Component {
       },
       update: (cache, result) => {
         const { data: { signIn: { me } } } = result;
+        // const data = { me };
         console.log('>>> sign in update: ', { me });
         cache.writeQuery({
           query: GET_ME,

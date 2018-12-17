@@ -22,12 +22,13 @@ class PlayersList extends React.Component {
         {({ loading, client, data }) => {
 
           const players = get(data, ['me', 'players']);
+          const me = get(data, ['me']);
           if (!players) return <div>Loading....</div>;
-          console.log('>>> players: ', players)
+          console.log('>>> players: ', {me, players})
           return (
             <div>
               <h3>Add player</h3>
-              <CreatePlayerForm />
+              <CreatePlayerForm me={me} />
 
               <h3>Players list {players.length}</h3>
 

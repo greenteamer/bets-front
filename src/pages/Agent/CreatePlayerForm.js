@@ -16,14 +16,16 @@ class CreatePlayerForm extends React.Component {
   }
 
   handleOnAddPlayer = () => {
-    const { mutate } = this.props;
+    const { mutate, me } = this.props;
     const { username, email, password } = this.state;
+    console.log('>>> sign up handle on create player: ', { me });
     mutate({
       variables: {
         username,
         email,
         password,
         role: ROLES.PLAYER,
+        agentId: me.id,
       },
       update: (cache, { data }) => {
         const newPlayer = get(data, ['signUp']);

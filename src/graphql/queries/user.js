@@ -4,6 +4,7 @@ export const PLAYERS_FRAGMENT = gql`
   fragment UserPlayers on User {
     players {
       id
+      agentId
       username
       email
       role
@@ -25,6 +26,7 @@ export const GET_ME = gql`
   {
     me {
       id
+      agentId
       username
       email
       role

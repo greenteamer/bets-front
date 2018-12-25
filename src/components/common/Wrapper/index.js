@@ -22,6 +22,14 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 8px;
   }
 
+  body {
+    margin: 0;
+  }
+
+  body, a, p, span {
+    font-size: 1.75rem;
+  }
+
   h1 {
     font-weight: 400;
   }

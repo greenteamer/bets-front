@@ -49,7 +49,6 @@ const HeaderContainer = styled.div`
 const HeaderLink = styled(Link)`
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   padding: 0.5rem;
 `;
 
@@ -71,13 +70,12 @@ const HeaderName = styled.div`
 `;
 
 const Logo = styled.div`
-  font-size: 2.5rem;
+  font-size: 3.5rem;
 `;
 
 const Slogan = styled.div`
   display: flex;
   align-self: flex-start;
-  font-size: 1rem;
 `;
 
 export default withRouter(appConsumerWrapper(Header))

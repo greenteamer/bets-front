@@ -16,6 +16,10 @@ export const GET_USER_PLAYERS = gql`
   { 
     me {
       id
+      agentId
+      username
+      email
+      role
       ...UserPlayers
     }
   }

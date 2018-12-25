@@ -7,3 +7,7 @@ export const getAccessByRoles = (me, rolesList) => {
   if (rolesList && !rolesList.includes(me.role)) return false;
   return true;
 }
+
+export const getRgba = (color, opacity) => {
+
+}

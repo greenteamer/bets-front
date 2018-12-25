@@ -43,39 +43,17 @@ const ProfileContainer = styled.div`
 const HeaderLink = styled(Link)`
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   padding: 0.5rem;
 `;
 
 const HeaderElement = styled.span`
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   padding: 0.5rem;
   &:hover {
     cursor: pointer;
   }
 `;
 
-const HeaderMenu = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const HeaderName = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Logo = styled.div`
-  font-size: 2.5rem;
-`;
-
-const Slogan = styled.div`
-  display: flex;
-  align-self: flex-start;
-  font-size: 1rem;
-`;
 
 export default withRouter(graphql(GET_ME)(ProfileMenu))

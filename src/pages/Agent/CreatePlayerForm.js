@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql } from "react-apollo";
 import { get } from 'lodash';
+import { Button, Input, Field, Label, styled } from 'reakit';
+import { palette as p } from 'styled-tools';
 
-import Button from '../../components/common/Button';
 import { SIGN_UP } from '../../graphql/mutations';
 import { GET_USER_PLAYERS, GET_ME } from '../../graphql/queries';
 import { ROLES } from '../../constants'
@@ -18,7 +19,6 @@ class CreatePlayerForm extends React.Component {
   handleOnAddPlayer = () => {
     const { mutate, me } = this.props;
     const { username, email, password } = this.state;
-    console.log('>>> sign up handle on create player: ', { me });
     mutate({
       variables: {
         username,
@@ -30,7 +30,6 @@ class CreatePlayerForm extends React.Component {
       update: (cache, { data }) => {
         const newPlayer = get(data, ['signUp']);
         const root = cache.readQuery({ query: GET_ME })
-        console.log('>>> sign up update: ', { newPlayer, root });
         cache.writeQuery({
           query: GET_ME,
           data: {
@@ -43,7 +42,8 @@ class CreatePlayerForm extends React.Component {
       }
     }).then(result => {
       const { data: { signUp } } = result;
-      console.log('>>>> mutate result: ', { signUp });
+      const { onHide } = this.props;
+      onHide();
       // this.props.history.push('/games');
     }).catch(error => {
       console.log('>>>> mutate error: ', { error });
@@ -57,23 +57,43 @@ class CreatePlayerForm extends React.Component {
   render() {
     const { username, email, password } = this.state;
     return (
-      <div style={{ padding: '10px' }}>
-        <div>
-          <p>username</p>
-          <input type="text" value={username} onChange={this.handleOnChangeInput('username')} />
-        </div>
-        <div>
-          <p>email</p>
-          <input type="email" value={email} onChange={this.handleOnChangeInput('email')} />
-        </div>
-        <div>
-          <p>password</p>
-          <input type="password" value={password} onChange={this.handleOnChangeInput('password')} />
-        </div>
+      <Container>
+        <h3>Create Player</h3>
+        <Field marginBottom="1rem">
+          <Input
+            id="username"
+            placeholder="username"
+            value={username}
+            onChange={this.handleOnChangeInput('username')}
+          />
+        </Field>
+        <Field marginBottom="1rem">
+          <Input
+            id="email"
+            placeholder="email"
+            type="email"
+            value={email}
+            onChange={this.handleOnChangeInput('email')}
+          />
+        </Field>
+        <Field marginBottom="1rem">
+          <Input
+            id="password"
+            placeholder="password"
+            type="password"
+            value={password}
+            onChange={this.handleOnChangeInput('password')}
+          />
+        </Field>
         <Button onClick={this.handleOnAddPlayer} primary>Create</Button>
-      </div>
+      </Container>
     )
   }
 }
 
 export default graphql(SIGN_UP)(CreatePlayerForm);
+
+const Container = styled.div`
+  padding: 1rem;
+  background-color: ${p('grayscale', -2)};
+`;

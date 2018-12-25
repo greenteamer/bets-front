@@ -1,10 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { COLORS } from '../../../constants';
 
 
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
   background: white;
   border-radius: 0.5rem;
   box-shadow: 1px 2px 50px rgba(0,0,0,0.1);

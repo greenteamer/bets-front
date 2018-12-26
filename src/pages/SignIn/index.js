@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { graphql } from "react-apollo";
+import { Button, Input, Field, Label, styled, Backdrop, Overlay } from 'reakit';
+import { Link } from 'react-router-dom';
+import { palette as p } from 'styled-tools';
 import Cookie from 'js-cookie';
 
-import Button from '../../components/common/Button';
+// import Button from '../../components/common/Button';
 import { appConsumerWrapper } from '../../wrappers/AppStore';
 import { SIGN_IN } from '../../graphql/mutations';
 import { GET_ME } from '../../graphql/queries';
+import SidebarMenu from '../../components/SidebarMenu';
+import ContentLayout from '../../components/Layouts/ContentLayout';
 
 
 class SignIn extends Component { 
@@ -50,61 +55,57 @@ class SignIn extends Component {
     const { username, password } = this.state;
 
     return (
-      <PageContainer>
-        <CardContainer>
-          <CardHeader>Sign In</CardHeader>
-          <CardContent>
-            <div>
-              <p>email or username</p>
-              <input type="text" value={username} onChange={this.handleOnChange('username')} />
-            </div>
-            <div>
-              <p>password</p>
-              <input type="password" value={password} onChange={this.handleOnChange('password')}/>
-            </div>
-            <ButtonContainer>
-              <Button onClick={this.handleOnSignIn} primary>Sign In</Button>
-            </ButtonContainer>
-          </CardContent>
-        </CardContainer>
-      </PageContainer>
+      <ContentLayout>
+        <Overlay.Container>
+          {overlay => (
+            <Container>
+              <MyBackdrop visible={true} />
+              <MyOverlay fade slide {...overlay} visible={true}>
+                <h3>Sign In</h3>
+                <Field marginBottom="1rem">
+                  <Input
+                    id="username"
+                    placeholder="email or username"
+                    value={username}
+                    onChange={this.handleOnChange('username')}
+                  />
+                </Field>
+                <Field marginBottom="1rem">
+                  <Input
+                    id="password"
+                    placeholder="password"
+                    type="password"
+                    value={password}
+                    onChange={this.handleOnChange('password')}
+                  />
+                </Field>
+                <Button onClick={this.handleOnSignIn} primary>Sign In</Button>
+                <MyLink to="/">go to home page</MyLink>
+              </MyOverlay>
+            </Container>
+          )}
+        </Overlay.Container>
+      </ContentLayout>
     );
   }
 }
 
 export default graphql(SIGN_IN)(appConsumerWrapper(SignIn));
 
-const PageContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+const MyLink = styled(Link)`
+  float: right;
 `;
 
-const CardContainer = styled.div`
-  width: 22rem;
-  background: white;
-  border-radius: 0.5rem;
-  justify-content: center;
-  margin-top: 2rem;
-  box-shadow: 1px 2px 50px rgba(0,0,0,0.1);
-`;
-
-const CardContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+const Container = styled.div`
   padding: 1rem;
+  background-color: ${p('grayscale', -2)};
 `;
 
-const CardHeader = styled.h1`
-  text-align: center;
-  border-bottom: 1px solid #c8e0f5;
-  padding: 1rem;
+const MyOverlay = styled(Overlay)`
+  min-width: 300px;
+  background-color: ${p('grayscale', -2)};
 `;
 
-const ButtonContainer = styled.div`
-  margin-top: 1rem;
+const MyBackdrop = styled(Backdrop)`
+  background-color: white;
 `;

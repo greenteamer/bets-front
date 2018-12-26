@@ -30,9 +30,6 @@ class Header extends Component {
             <HeaderLink to="/agent">
               Agent
             </HeaderLink>
-            <HeaderLink to="/schedule">
-              Schedule
-            </HeaderLink>
           </MainMenu>
           <ProfileMenu me={me} />
         </HeaderMenu>

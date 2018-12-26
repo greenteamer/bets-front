@@ -31,10 +31,10 @@ const Routes = ({ me }) => {
         <Route
           path='/agent'
           render={(props) => (
-            <Agent {...props} />
-            // (getAccessByRoles(me, [ROLES.AGENT, ROLES.ADMIN]))
-            //   ? <Agent {...props} />
-            //   : <Redirect to="/sign-in" />
+            // <Agent {...props} />
+            (getAccessByRoles(me, [ROLES.AGENT, ROLES.ADMIN]))
+              ? <Agent {...props} />
+              : <Redirect to="/sign-in" />
           )}
         />
         <Route

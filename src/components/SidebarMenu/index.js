@@ -17,8 +17,8 @@ const Menu = ({ match, tree }) => {
                 <li>
                   <Hidden.Toggle as={ButtonS} {...hidden}>{item}</Hidden.Toggle>
                   <HiddenS {...hidden}>
-                    {map(tree[item], sport => (
-                      <ButtonS key={sport.key}><LinkS to={`${match.path}/${sport.key}`}>{sport.title}</LinkS></ButtonS>
+                    {map(tree[item], (obj, index) => (
+                      <ButtonS key={index}><LinkS to={obj.url}>{obj.title}</LinkS></ButtonS>
                     ))}
                   </HiddenS>
                 </li>

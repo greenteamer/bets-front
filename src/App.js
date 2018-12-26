@@ -13,7 +13,6 @@ const App = () => (
   <Query query={GET_ME} fetchPolicy="network-only">
     {({ client, loading, data }) => {
       const me = get(data, ['me']);
-      console.log('>>> App me: ', { me });
       return (
         <div>
           <Header me={me} />

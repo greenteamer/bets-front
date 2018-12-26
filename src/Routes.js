@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { ROLES } from './constants';
 import Home from './pages/Home';
+import Games from './pages/Games';
 import Admin from './pages/Admin';
 import Agent from './pages/Agent';
 import Schedule from './pages/Schedule';
@@ -15,6 +16,10 @@ const Routes = ({ me }) => {
     <main>
       <Switch>
         <Route exact path='/' component={Home}/>
+        <Route
+          path='/games'
+          component={Games}
+        />
         <Route
           path='/admin'
           render={(props) => (

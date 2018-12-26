@@ -12,6 +12,17 @@ export const PLAYERS_FRAGMENT = gql`
   }
 `;
 
+export const GET_USERS = gql`
+  { 
+    users {
+      id
+      username
+      email
+      role
+    }
+  }
+`;
+
 export const GET_USER_PLAYERS = gql`
   { 
     me {

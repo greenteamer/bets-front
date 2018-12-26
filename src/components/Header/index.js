@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
+import { get } from 'lodash';
 
 import ProfileMenu from '../ProfileMenu';
 import { appConsumerWrapper } from '../../wrappers/AppStore';
+import { ROLES } from '../../constants';
 
 
 class Header extends Component {
+
   render() {
     const { me } = this.props;
+    const role = get(me, ['role'])
+
     return (
       <HeaderContainer>
         <HeaderName>
@@ -24,12 +29,16 @@ class Header extends Component {
             <HeaderLink to="/games">
               Games
             </HeaderLink>
-            <HeaderLink to="/admin">
-              Admin
-            </HeaderLink>
-            <HeaderLink to="/agent">
-              Agent
-            </HeaderLink>
+            {role === ROLES.ADMIN &&
+              <HeaderLink to="/admin">
+                Admin
+              </HeaderLink>
+            }
+            {role === ROLES.AGENT &&
+              <HeaderLink to="/agent">
+                Agent
+              </HeaderLink>
+            }
           </MainMenu>
           <ProfileMenu me={me} />
         </HeaderMenu>

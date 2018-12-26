@@ -16,13 +16,14 @@ const template = `
 
 const PlateItem = ({ team, h2h, top }) => (
   <MyCard template={template} top={top}>
-    <Grid.Item area="a" height={40}>
-      <MyImage
-        src="https://placekitten.com/300/300"
+    <Grid.Item area="a">
+      {/* <MyImage
+        src="//ssl.gstatic.com/onebox/media/sports/logos/ofjScRGiytT__Flak2j4dg_48x48.png"
         width={40}
         height={40}
         top={top}
-      />
+      /> */}
+      <Logo>Logo</Logo>
     </Grid.Item>
     <Grid.Item area="b">
       <MyTitle>{team}</MyTitle>
@@ -59,6 +60,12 @@ const MyCard = styled(Grid)`
 
 const MyTitle = styled.div`
   margin-left: 1rem;
+`;
+
+const Logo = styled.div`
+  font-size: 1.25rem;
+  padding: 1rem;
+  color: ${p('slate')}
 `;
 
 const MyImage = styled.img`

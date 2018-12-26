@@ -1,39 +1,36 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
+import { Block, Flex, Grid, withTheme } from 'reakit';
 
+import SidebarMenu from '../../components/SidebarMenu';
+import List from './List';
+import ContentLayout from '../../components/Layouts/ContentLayout';
 
-function Topic({ match }) {
-  return (
-    <div>
-      <h3>{match.params.topicId}</h3>
-    </div>
-  );
+const template = `
+  "b c c" minmax(200px, 1fr)
+  "d d d" 100px / 1fr 2fr 2fr
+`;
+
+const tree = {
+  users: [
+    {
+      title: 'list',
+      url: '/admin/users',
+    },
+  ],
 }
 
-
-const Games = ({ match, me }) => (
-    <div>
-      <h2>Topics {me && me.username} </h2>
-      {console.log('>>> match.url: ', { match, location: window.location.pathname })}
-      <ul>
-        <li>
-          <Link to={`${match.url}/rendering`}>Rendering with React</Link>
-        </li>
-        <li>
-          <Link to={`${match.url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-        </li>
-      </ul>
-
-      <Route path={`${match.path}/:topicId`} component={Topic} />
-      <Route
-        exact
-        path={match.path}
-        render={() => <h3>Please select a topic.</h3>}
-      />
-    </div>
+const Agent = ({ match }) => (
+  <ContentLayout
+    sidebar={<SidebarMenu match={match} tree={tree} />}
+  >
+    <Route path={`${match.path}/users`} component={List} />
+    <Route
+      exact
+      path={match.path}
+      render={() => <h3>Please select a page.</h3>}
+    />
+  </ContentLayout>
 );
 
-export default Games;
+export default Agent;

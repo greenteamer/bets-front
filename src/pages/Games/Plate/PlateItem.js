@@ -8,14 +8,16 @@ import {
 import { palette as p } from 'styled-tools';
 
 import { ButtonForm } from '../../../components/common';
+import { withUser } from '../../../Context/UserContext';
 
 
 const template = `
   "a b c d e" 40px / 40px 1fr 120px 120px 120px
 `;
 
-const PlateItem = ({ team, h2h, top }) => (
+const PlateItem = ({ team, h2h, top, user: { me, updateMe} }) => (
   <MyCard template={template} top={top}>
+    {console.log('>>>> PlateItem me: ', { me, updateMe })}
     <Grid.Item area="a">
       {/* <MyImage
         src="//ssl.gstatic.com/onebox/media/sports/logos/ofjScRGiytT__Flak2j4dg_48x48.png"
@@ -65,7 +67,7 @@ const MyTitle = styled.div`
 const Logo = styled.div`
   font-size: 1.25rem;
   padding: 1rem;
-  color: ${p('slate')}
+  color: ${p('slate')};
 `;
 
 const MyImage = styled.img`
@@ -82,4 +84,4 @@ const MyButton = styled(Button)`
   }
 `;
 
-export default PlateItem;
+export default withUser(PlateItem);

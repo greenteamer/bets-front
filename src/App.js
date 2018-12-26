@@ -7,12 +7,14 @@ import Header from './components/Header';
 import Routes from './Routes';
 import { GET_ME } from './graphql/queries';
 import { GlobalStyle } from './components/common'
+import { withUser } from './Context/UserContext';
 
 
-const App = () => (
+const App = ({ user: { updateMe } }) => (
   <Query query={GET_ME} fetchPolicy="network-only">
     {({ client, loading, data }) => {
       const me = get(data, ['me']);
+      // updateMe(me);
       return (
         <div>
           <Header me={me} />
@@ -24,4 +26,4 @@ const App = () => (
   </Query>
 );
 
-export default App;
+export default withUser(App);

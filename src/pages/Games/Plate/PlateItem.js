@@ -7,7 +7,7 @@ import {
 } from 'reakit';
 import { palette as p } from 'styled-tools';
 
-import { ButtonForm } from '../common';
+import { ButtonForm } from '../../../components/common';
 
 
 const template = `
@@ -34,7 +34,12 @@ const PlateItem = ({ team, h2h, top }) => (
       <MyButton>{0}</MyButton>
     </Grid.Item>
     <Grid.Item area="e">
-      <ButtonForm>{h2h}</ButtonForm>
+      <ButtonForm
+        onSuccess={value => console.log('&&& on create: ', { value })}
+        onCancel={value => console.log('&&& on cancel: ', { value })}
+      >
+        {h2h}
+      </ButtonForm>
     </Grid.Item>
   </MyCard>
 );

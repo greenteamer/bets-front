@@ -5,7 +5,7 @@ import { styled, Card, Button, Overlay, Block, Backdrop } from 'reakit';
 import { palette as p } from 'styled-tools';
 
 import { GET_ODDS } from '../../graphql/queries';
-import Plate from '../../components/Plate';
+import Plate from './Plate';
 import { formatUS } from './utils';
 
 

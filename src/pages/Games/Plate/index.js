@@ -5,7 +5,7 @@ import {
 import { palette as p } from 'styled-tools';
 
 import PlateItem from './PlateItem';
-import { ButtonForm } from '../common';
+import { ButtonForm } from '../../../components/common';
 
 
 class Plate extends React.Component {

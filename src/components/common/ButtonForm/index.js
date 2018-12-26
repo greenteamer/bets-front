@@ -11,29 +11,70 @@ import {
 import { palette as p } from 'styled-tools';
 
 
-const ButtonForm = ({ children }) => (
-  <Popover.Container>
-    {popover => (
-      <Block relative>
-        <MyButton as={Popover.Toggle} {...popover}>
-          {children}
-        </MyButton>
-        <Popover fade slide expand hideOnClickOutside {...popover}>
-          <Popover.Arrow />
-          <Block>
-            <Field>
-              <Input id="input1" type="number" placeholder="Your bet" />
-            </Field>
-            <Group marginTop={8}>
-              <Button secondary>Ok</Button>
-              <Button>Cancel</Button>
-            </Group>
+class ButtonForm extends React.Component { 
+  state = {
+    value: '',
+  }
+
+  clearState = () => {
+    this.setState({ value: '' });
+  }
+
+  handleOnSuccess = popover => () => {
+    const { value } = this.state;
+    const { onSuccess } = this.props;
+    onSuccess(value);
+    this.clearState();
+    popover.hide();
+  }
+ 
+
+  handleOnCancel = popover => () => {
+    const { onCancel } = this.props;
+    onCancel();
+    this.clearState();
+    popover.hide();
+  }
+
+  handleOnChange = e => {
+    const { value } = e.target;
+    this.setState({ value });
+  }
+
+  render() { 
+    const { children } = this.props;
+    const { value } = this.state;
+    return (
+      <Popover.Container>
+        {popover => (
+          <Block relative>
+            <MyButton as={Popover.Toggle} {...popover}>
+              {children}
+            </MyButton>
+            <Popover fade slide expand hideOnClickOutside {...popover}>
+              <Popover.Arrow />
+              <Block>
+                <Field>
+                  <Input
+                    id="input1"
+                    type="number"
+                    placeholder="Your bet"
+                    value={value}
+                    onChange={this.handleOnChange}
+                  />
+                </Field>
+                <Group marginTop={8}>
+                  <Button secondary onClick={this.handleOnSuccess(popover)}>Ok</Button>
+                  <Button onClick={this.handleOnCancel(popover)}>Cancel</Button>
+                </Group>
+              </Block>
+            </Popover>
           </Block>
-        </Popover>
-      </Block>
-    )}
-  </Popover.Container>
-);
+        )}
+      </Popover.Container>
+    );
+  }
+}
 
 const MyButton = styled(Button)`
   width: 100%;

@@ -4,7 +4,10 @@ import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import Cookie from 'js-cookie';
 import { graphql } from "react-apollo";
+import { Block, Button, Backdrop, Sidebar } from "reakit";
+
 import { GET_ME } from '../../graphql/queries'
+import SidebarProfile from './SidebarProfile';
 
 
 class ProfileMenu extends Component {
@@ -18,10 +21,22 @@ class ProfileMenu extends Component {
     if (me) {
       return (
         <ProfileContainer>
-          <HeaderElement
-            onClick={handleLogout}>
-            Logout
-          </HeaderElement>
+          <Sidebar.Container>
+            {sidebar => (
+              <Block>
+                {/* <Button as={Sidebar.Show} {...sidebar}> */}
+                <HeaderElement
+                  onClick={sidebar.show}>
+                  Profile
+                </HeaderElement>
+                {/* </Button> */}
+                <Backdrop fade as={Sidebar.Hide} {...sidebar} />
+                <Sidebar slide align="right" {...sidebar}>
+                  <SidebarProfile me={me} onLogout={handleLogout} />
+                </Sidebar>
+              </Block>
+            )}
+          </Sidebar.Container>
         </ProfileContainer>
       )
     }

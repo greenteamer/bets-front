@@ -33,11 +33,10 @@ class PlayersList extends React.Component {
           if (!players) return <div>Loading....</div>;
           return (
             <div>
-              <h3>Add player</h3>
               <Overlay.Container>
                 {overlay => (
                   <Block>
-                    <Button as={Overlay.Show} {...overlay}>Click me</Button>
+                    <Button as={Overlay.Show} {...overlay}>Sign Up player</Button>
                     <Backdrop fade as={Overlay.Hide} {...overlay} />
                     <MyOverlay fade slide {...overlay}>
                       <CreatePlayerForm me={me} onHide={overlay.hide} />

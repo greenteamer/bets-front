@@ -3,7 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import { Block, Flex, Grid, withTheme } from 'reakit';
 
 import SidebarMenu from '../../components/SidebarMenu';
-import PlayersList from './PlayersList';
+import List from './List';
 import ContentLayout from '../../components/Layouts/ContentLayout';
 
 const template = `
@@ -12,10 +12,10 @@ const template = `
 `;
 
 const tree = {
-  players: [
+  users: [
     {
       title: 'list',
-      url: '/agent/players',
+      url: '/admin/users',
     },
   ],
 }
@@ -24,7 +24,7 @@ const Agent = ({ match }) => (
   <ContentLayout
     sidebar={<SidebarMenu match={match} tree={tree} />}
   >
-    <Route path={`${match.path}/players`} component={PlayersList} />
+    <Route path={`${match.path}/users`} component={List} />
     <Route
       exact
       path={match.path}

@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
+import { get } from 'lodash';
 
 import ProfileMenu from '../ProfileMenu';
 import { appConsumerWrapper } from '../../wrappers/AppStore';
+import { ROLES } from '../../constants';
 
 
 class Header extends Component {
+
   render() {
     const { me } = this.props;
+    const role = get(me, ['role'])
+
     return (
       <HeaderContainer>
         <HeaderName>
@@ -24,12 +29,16 @@ class Header extends Component {
             <HeaderLink to="/games">
               Games
             </HeaderLink>
-            <HeaderLink to="/agent">
-              Agent
-            </HeaderLink>
-            <HeaderLink to="/schedule">
-              Schedule
-            </HeaderLink>
+            {role === ROLES.ADMIN &&
+              <HeaderLink to="/admin">
+                Admin
+              </HeaderLink>
+            }
+            {role === ROLES.AGENT &&
+              <HeaderLink to="/agent">
+                Agent
+              </HeaderLink>
+            }
           </MainMenu>
           <ProfileMenu me={me} />
         </HeaderMenu>
@@ -49,7 +58,6 @@ const HeaderContainer = styled.div`
 const HeaderLink = styled(Link)`
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   padding: 0.5rem;
 `;
 
@@ -71,13 +79,12 @@ const HeaderName = styled.div`
 `;
 
 const Logo = styled.div`
-  font-size: 2.5rem;
+  font-size: 3.5rem;
 `;
 
 const Slogan = styled.div`
   display: flex;
   align-self: flex-start;
-  font-size: 1rem;
 `;
 
 export default withRouter(appConsumerWrapper(Header))

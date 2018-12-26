@@ -2,21 +2,41 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
+import Cookie from 'js-cookie';
+import { graphql } from "react-apollo";
+import { Block, Button, Backdrop, Sidebar } from "reakit";
+
+import { GET_ME } from '../../graphql/queries'
+import SidebarProfile from './SidebarProfile';
 
 
 class ProfileMenu extends Component {
   render() {
     const { me } = this.props;
     const handleLogout = () => {
-      console.log('>>> ProfileMenu logout');
+      Cookie.remove('token');
+      const { data: { refetch } } = this.props;
+      refetch();
     }
     if (me) {
       return (
         <ProfileContainer>
-          <HeaderElement
-            onClick={handleLogout}>
-            Logout
-          </HeaderElement>
+          <Sidebar.Container>
+            {sidebar => (
+              <Block>
+                {/* <Button as={Sidebar.Show} {...sidebar}> */}
+                <HeaderElement
+                  onClick={sidebar.show}>
+                  Profile
+                </HeaderElement>
+                {/* </Button> */}
+                <Backdrop fade as={Sidebar.Hide} {...sidebar} />
+                <Sidebar slide align="right" {...sidebar}>
+                  <SidebarProfile me={me} onLogout={handleLogout} />
+                </Sidebar>
+              </Block>
+            )}
+          </Sidebar.Container>
         </ProfileContainer>
       )
     }
@@ -38,39 +58,17 @@ const ProfileContainer = styled.div`
 const HeaderLink = styled(Link)`
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   padding: 0.5rem;
 `;
 
 const HeaderElement = styled.span`
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   padding: 0.5rem;
   &:hover {
     cursor: pointer;
   }
 `;
 
-const HeaderMenu = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
-const HeaderName = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Logo = styled.div`
-  font-size: 2.5rem;
-`;
-
-const Slogan = styled.div`
-  display: flex;
-  align-self: flex-start;
-  font-size: 1rem;
-`;
-
-export default withRouter(ProfileMenu)
+export default withRouter(graphql(GET_ME)(ProfileMenu))

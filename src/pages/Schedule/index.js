@@ -60,14 +60,14 @@ class Messages extends Component {
     return (
       <Query
         query={gql`
-      {
-        messages {
-          id
-          text
-          createdAt
-        }
-      }
-    `}
+          {
+            messages {
+              id
+              text
+              createdAt
+            }
+          }
+        `}
       >
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>

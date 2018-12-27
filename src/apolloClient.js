@@ -24,7 +24,7 @@ const authLink = setContext((_, { headers }) => {
 
 const logLink = onError(({ graphQLErrors, networkError }) => {
   const errorArr = errorParser({ graphQLErrors, networkError });
-  console.log('^^^^ errors handler: ', errorArr);
+  console.log('^^^^ errors handler: ', { graphQLErrors, networkError });
   errorArr.map(err => {
     if (err.statusCode === 401) {
       Cookie.set('token', '');

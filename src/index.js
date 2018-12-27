@@ -11,7 +11,7 @@ import App from './App';
 import AppProvider from './wrappers/AppStore';
 import client from './apolloClient';
 import * as serviceWorker from './serviceWorker';
-import UserStore from './Context/UserContext';
+// import UserStore from './Context/UserContext';
 
 
 ReactDOM.render(
@@ -19,9 +19,7 @@ ReactDOM.render(
     <AppProvider>
       <ApolloProvider client={client}>
         <Provider theme={theme}>
-          <UserStore>
-            <App />
-          </UserStore>
+          <App />
         </Provider>
       </ApolloProvider>
     </AppProvider>

@@ -9,7 +9,7 @@ import { errorParser } from './utils/errors';
 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: 'http://itkartell.ru:5000/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

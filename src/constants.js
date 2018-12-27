@@ -4,7 +4,6 @@ export const ROLES = {
   PLAYER: 'PLAYER',
 };
 
-
 export const COLORS = {
   white: 'white',
   iceBlue: '#eef1f4',

@@ -32,7 +32,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "serve": "pm2 ./server.js -n buddaberry-front"
+    "serve": "pm2 start ./server.js -n buddaberry-front"
   },
   "eslintConfig": {
     "extends": "react-app"

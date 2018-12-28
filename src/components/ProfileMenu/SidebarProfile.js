@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import Cookie from 'js-cookie';
 import { graphql } from "react-apollo";
-import { styled, Block, Button, Backdrop, Sidebar } from "reakit";
+import { styled, Block, Button, Backdrop, Sidebar, Heading } from "reakit";
+import { palette as p } from 'styled-tools';
+import { map } from 'lodash';
+
 
 export default ({ me, onLogout }) => (
   <ProfileWrapper>
@@ -14,6 +17,15 @@ export default ({ me, onLogout }) => (
       <InfoItem title="At Risk" value={me.atRisk} />
     </BillingInfo>
     <ButtonS onClick={onLogout}>Logout</ButtonS>
+    <div>
+      <HeadingS as="h4">Your bets</HeadingS>
+      {map(me.bets, (bet, index) => (
+        <MyCard key={index} block>
+          <div>{bet.team}</div>
+          <div>{bet.amount} $</div>
+        </MyCard>
+      ))}
+    </div>
   </ProfileWrapper>
 );
 
@@ -37,4 +49,18 @@ const BillingInfo = styled.div`
   margin: 1rem 0;
 `;
 const BillingItem = styled.div`
+`;
+
+const MyCard = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: ${p('iceBlue')};
+`;
+
+const HeadingS = styled(Heading)`
+  margin-top: 2rem!important;
+  text-align: center;
 `;

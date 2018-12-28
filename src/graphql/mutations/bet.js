@@ -5,6 +5,12 @@ export const CREATE_BET = gql`
   mutation ($input: CreateBetInput!) {
     createBet(input: $input) {
       id
+      available
+      bets {
+        id
+        amount
+        team
+      }
     }
   }
 `;

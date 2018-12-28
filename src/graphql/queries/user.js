@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const BETS_FRAGMENT = gql`
+  fragment UserBets on User {
+    bets {
+      id
+      amount
+      team
+    }
+  }
+`;
+
 export const PLAYERS_FRAGMENT = gql`
   fragment UserPlayers on User {
     players {
@@ -11,8 +21,10 @@ export const PLAYERS_FRAGMENT = gql`
       balance
       available
       atRisk
+      ...UserBets
     }
   }
+  ${BETS_FRAGMENT}
 `;
 
 export const GET_USERS = gql`
@@ -25,8 +37,10 @@ export const GET_USERS = gql`
       balance
       available
       atRisk
+      ...UserBets
     }
   }
+  ${BETS_FRAGMENT}
 `;
 
 export const GET_USER_PLAYERS = gql`
@@ -40,10 +54,12 @@ export const GET_USER_PLAYERS = gql`
       balance
       available
       atRisk
+      ...UserBets
       ...UserPlayers
     }
   }
   ${PLAYERS_FRAGMENT}
+  ${BETS_FRAGMENT}
 `;
 
 export const GET_ME = gql`
@@ -57,9 +73,11 @@ export const GET_ME = gql`
       balance
       available
       atRisk
+      ...UserBets
       ...UserPlayers
     }
   }
   ${PLAYERS_FRAGMENT}
+  ${BETS_FRAGMENT}
 `;
 

@@ -2,14 +2,26 @@ import React from 'react';
 import { styled, Card, Button, Overlay, Block, Backdrop, Flex, Grid, withTheme } from 'reakit';
 import { palette as p } from 'styled-tools';
 import moment from 'moment';
+import { map, get } from 'lodash';
 
 import PlateItem from './PlateItem';
 import { ButtonForm } from '../../../components/common';
+import { formatUS } from '../utils';
 
 
 class Plate extends React.Component {
   render() {
-    const { theme, team1, team2, homeTeam, commenceTime, sites, h2h, gutter } = this.props;
+    const { theme, gutter, odd } = this.props;
+    const { teams, homeTeam, commence_time: commenceTime, sites, h2h, id } = odd;
+
+    console.log('>>> Odd(event) id: ', { odd });
+
+    const formatH2H = odd => {
+      const sites = get(odd, ['sites']);
+      const values = get(sites[0], ['odds', 'h2h']);
+      return map(values, formatUS);
+    }
+
     const template = `
       "a b" auto / 120px auto
     `;
@@ -26,9 +38,24 @@ class Plate extends React.Component {
           </Time>
         </Grid.Item>
         <Grid.Item area="b">
-          <PlateItem team={team1} h2h={h2h[0]} top />
+          <PlateItem
+            eventId={odd.id}
+            siteKey={sites[0].site_key}
+            oddType="h2h"
+            oddIndex={0}
+            team={teams[0]}
+            h2h={formatH2H(odd)[0]}
+            top
+          />
           <Hr />
-          <PlateItem team={team2} h2h={h2h[1]} />
+          <PlateItem
+            eventId={odd.id}
+            siteKey={sites[0].site_key}
+            oddType="h2h"
+            oddIndex={1}
+            team={teams[1]}
+            h2h={formatH2H(odd)[1]}
+          />
         </Grid.Item>
       </MyGrid>
     );

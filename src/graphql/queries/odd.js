@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 export const GET_ODDS = gql`
   query ($sport_key:String!) {
     odds(sport_key:$sport_key) {
+      id
       sport_key
       sport_nice
       teams

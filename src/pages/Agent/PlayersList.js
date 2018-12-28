@@ -6,6 +6,7 @@ import { palette as p } from 'styled-tools';
 
 import { GET_USER_PLAYERS } from '../../graphql/queries';
 import CreatePlayerForm from './CreatePlayerForm';
+import PlayerItem from './PlayerItem';
 
 
 const PlayerRaw = ({ player }) => (
@@ -24,7 +25,6 @@ class PlayersList extends React.Component {
   }
 
   render() {
-    console.log('**** Player List props: ', { props: this.props });
     return (
       <Query query={GET_USER_PLAYERS} fetchPolicy="network-only">
         {({ loading, client, data }) => {
@@ -44,9 +44,14 @@ class PlayersList extends React.Component {
                   </Block>
                 )}
               </Overlay.Container>
-              <h3>Players list {players.length}</h3>
               {map(players, player => (
-                <PlayerRaw player={player} key={player.id} />
+                <ListContainer>
+                  <PlayerItem
+                    username={player.username}
+                    email={player.email}
+                    key={player.id}
+                  />
+                </ListContainer>
               ))}
             </div>
           );
@@ -60,4 +65,8 @@ export default PlayersList;
 
 const MyOverlay = styled(Overlay)`
   background-color: ${p('grayscale', -2)};
+`;
+
+const ListContainer = styled.div`
+  margin-top: 1rem;
 `;

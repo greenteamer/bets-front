@@ -19,11 +19,6 @@ class OddsTable extends React.Component {
       "c c c c c" auto / 136px auto 120px 120px 120px
     `;
     if (odds.length === 0) return <p>no odds</p>;
-    const formatH2H = odd => {
-      const sites = get(odd, ['sites']);
-      const values = get(sites[0], ['odds', 'h2h']);
-      return map(values, formatUS);
-    }
     return (
       <div>
         <Heading as="h4">{ odds[0].sport_nice }</Heading>
@@ -38,12 +33,7 @@ class OddsTable extends React.Component {
               <Plate
                 key={index}
                 gutter="1rem 0"
-                team1={odd.teams[0]}
-                team2={odd.teams[1]}
-                homeTeam={odd.home_team}
-                commenceTime={odd.commence_time}
-                sites={odd.sites}
-                h2h={formatH2H(odd)}
+                odd={odd}
               />
             ))}
           </Grid.Item>

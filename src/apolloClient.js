@@ -9,7 +9,7 @@ import { errorParser } from './utils/errors';
 
 
 const httpLink = createHttpLink({
-  url: 'http://itkartell.ru:5000/graphql',
+  uri: 'http://itkartell.ru:5000/graphql',
   // uri: process.env.NODE_ENV === 'production'
   //   ? 'http://itkartell.ru:5000/graphql'
   //   : 'http://localhost:5000/graphql',

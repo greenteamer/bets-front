@@ -45,19 +45,6 @@ class PlateItem extends React.Component {
       variables: {
         input,
       },
-      // update: (cache, { data }) => {
-      //   const newPlayer = get(data, ['signUp']);
-      //   const root = cache.readQuery({ query: GET_ME })
-      //   cache.writeQuery({
-      //     query: GET_ME,
-      //     data: {
-      //       me: {
-      //         ...root.me,
-      //         players: root.me.players.concat([newPlayer]),
-      //       },
-      //     },
-      //   });
-      // }
     }).then(result => {
       const { data: { createBet } } = result;
       console.log('>>>> create bet mutation result: ', { result });
@@ -84,6 +71,7 @@ class PlateItem extends React.Component {
         </Grid.Item>
         <Grid.Item area="e">
           <ButtonForm
+            placeholder="0"
             onSuccess={this.handleOnCreateBet}
             onCancel={value => console.log('&&& on cancel: ', { value })}
           >

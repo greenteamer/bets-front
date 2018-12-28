@@ -9,9 +9,9 @@ export default ({ me, onLogout }) => (
   <ProfileWrapper>
     <Name>{me.username}</Name>
     <BillingInfo>
-      <InfoItem title="Balance" value={0} />
-      <InfoItem title="Available" value={0} />
-      <InfoItem title="At Risk" value={0} />
+      <InfoItem title="Balance" value={me.balance} />
+      <InfoItem title="Available" value={me.available} />
+      <InfoItem title="At Risk" value={me.atRisk} />
     </BillingInfo>
     <ButtonS onClick={onLogout}>Logout</ButtonS>
   </ProfileWrapper>

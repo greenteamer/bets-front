@@ -8,6 +8,9 @@ export const PLAYERS_FRAGMENT = gql`
       username
       email
       role
+      balance
+      available
+      atRisk
     }
   }
 `;
@@ -19,6 +22,9 @@ export const GET_USERS = gql`
       username
       email
       role
+      balance
+      available
+      atRisk
     }
   }
 `;
@@ -31,6 +37,9 @@ export const GET_USER_PLAYERS = gql`
       username
       email
       role
+      balance
+      available
+      atRisk
       ...UserPlayers
     }
   }
@@ -45,6 +54,9 @@ export const GET_ME = gql`
       username
       email
       role
+      balance
+      available
+      atRisk
       ...UserPlayers
     }
   }

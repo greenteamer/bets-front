@@ -42,7 +42,7 @@ class ButtonForm extends React.Component {
   }
 
   render() { 
-    const { children } = this.props;
+    const { children, placeholder } = this.props;
     const { value } = this.state;
     return (
       <Popover.Container>
@@ -58,7 +58,7 @@ class ButtonForm extends React.Component {
                   <Input
                     id="input1"
                     type="number"
-                    placeholder="Your bet"
+                    placeholder={placeholder}
                     value={value}
                     onChange={this.handleOnChange}
                   />

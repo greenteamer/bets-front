@@ -35,3 +35,12 @@ export const SIGN_UP = gql`
     }
   }
 `;
+
+export const UPDATE_AVAILABLE = gql`
+  mutation ($input: UpdateAvailableInput!) {
+    updateAvailable(input: $input) {
+      id
+      available
+    }
+  }
+`;

@@ -22,7 +22,21 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 8px;
   }
 
+  * {
+    box-sizing: border-box; 
+  }
+
   body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  #root {
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    flex-direction: column;
     margin: 0;
   }
 

@@ -13,9 +13,9 @@ export const COLORS = {
   black: '#1b1b1b',
 }
 
-export const theme = {
-  colors: {
-    primary: COLORS.slate,
-    secondary: COLORS.shamrockGreen,
-  }
-}
+// export const theme = {
+//   colors: {
+//     primary: COLORS.slate,
+//     secondary: COLORS.shamrockGreen,
+//   }
+// }

@@ -4,47 +4,48 @@ import { palette as p, prop } from 'styled-tools';
 import { Link } from 'react-router-dom'
 import { map } from 'lodash';
 
+// import { Button } from '../../components/common';
+import { colors } from '../../theme';
+import { media, Mobile } from '../../utils';
+
 
 const Menu = ({ match, tree }) => {
   return (
-    <Box>
-      <NavigationS>
-        <HeadingS as="h4">Games Panel</HeadingS>
-        <List>
-          {map(Object.keys(tree), item => (
-            <Hidden.Container key={item}>
-              {hidden => (
-                <li>
-                  <Hidden.Toggle as={ButtonS} {...hidden}>{item}</Hidden.Toggle>
-                  <HiddenS {...hidden}>
-                    {map(tree[item], (obj, index) => (
-                      <ButtonS key={index}><LinkS to={obj.url}>{obj.title}</LinkS></ButtonS>
-                    ))}
-                  </HiddenS>
-                </li>
-              )}
-            </Hidden.Container>
-          ))}
-        </List>
-      </NavigationS>
-    </Box>
+    <SidebarWrapper>
+      <HeadingS as="h4" color={colors.black}>Games Panel</HeadingS>
+      <List>
+        {map(Object.keys(tree), item => (
+          <Hidden.Container key={item}>
+            {hidden => (
+              <li>
+                <Hidden.Toggle as={MenuButton} {...hidden}>{item}</Hidden.Toggle>
+                <HiddenS {...hidden}>
+                  {map(tree[item], (obj, index) => (
+                    <MenuButton key={index}><LinkS to={obj.url}>{obj.title}</LinkS></MenuButton>
+                  ))}
+                </HiddenS>
+              </li>
+            )}
+          </Hidden.Container>
+        ))}
+      </List>
+    </SidebarWrapper>
   );
 }
 
 export default Menu;
 
-const NavigationS = styled(Navigation)`
-  /* width: 25rem; */
-  background-color: ${p('primary', 0)};
-  padding: 1rem;
-`;
+const MenuButton = (props) => (
+  <Button display="block" palette="transparent" small {...props} />
+)
 
-const ButtonS = styled(Button)`
-  display: block;
-  text-align: left;
-  width: 100%;
-  height: 3rem;
-  line-height: 3rem;
+const SidebarWrapper = styled(Navigation)`
+  padding: 1rem;
+  flex: 0 0 20vw;
+  background-color: ${p('white')};
+  /* ${media.desktop`background-color: ${p('primary', -1)}`}
+  ${media.tablet`background-color: ${p('primary', -2)}`}
+  ${media.mobile`background-color: ${p('secondary', 0)}`} */
 `;
 
 const HeadingS = styled(Heading)`
@@ -52,7 +53,7 @@ const HeadingS = styled(Heading)`
 `;
 
 const LinkS = styled(Link)`
-  color: ${p('blackText')};
+  color: ${p('whiteText')};
   text-decoration: none;
 `;
 

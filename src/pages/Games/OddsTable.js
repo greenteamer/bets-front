@@ -20,7 +20,7 @@ class OddsTable extends React.Component {
     `;
     if (odds.length === 0) return <p>no odds</p>;
     return (
-      <div>
+      <Wrapper>
         <Heading as="h4">{ odds[0].sport_nice }</Heading>
         <Grid template={template} gap="16px 0">
           <MyGridItem area="a" left><Label>Date 1</Label></MyGridItem>
@@ -38,12 +38,16 @@ class OddsTable extends React.Component {
             ))}
           </Grid.Item>
         </Grid>
-      </div>
+      </Wrapper>
     );
   }
 }
 
 export default withTheme(OddsTable);
+
+const Wrapper = styled.div`
+  flex: 1;
+`;
 
 const MyOverlay = styled(Overlay)`
   background-color: ${p('grayscale', -2)};

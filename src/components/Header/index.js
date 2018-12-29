@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import styled from 'styled-components';
+import { styled } from 'reakit';
+import { palette as p } from 'styled-tools';
 import { get } from 'lodash';
 
 import ProfileMenu from '../ProfileMenu';
@@ -47,11 +48,11 @@ class Header extends Component {
   }
 }
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   display: flex;
   padding: 1rem;
   justify-content: space-between;
-  background: #376f9a;
+  background: ${p('slate')};
   color: white;
 `;
 

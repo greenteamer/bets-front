@@ -9,13 +9,14 @@ import Agent from './pages/Agent';
 import Schedule from './pages/Schedule';
 import SignIn from './pages/SignIn';
 import { getAccessByRoles } from './utils';
+import { styled } from 'reakit';
 
 
 const Routes = ({ me }) => {
   return (
-    <main>
+    <Main>
       <Switch>
-        <Route exact path='/' component={Home}/>
+        <Route exact path='/' component={() => <Redirect to="/games"/>}/>
         <Route
           path='/games'
           component={Games}
@@ -39,8 +40,13 @@ const Routes = ({ me }) => {
         <Route path='/schedule' component={Schedule}/>
         <Route path='/sign-in' component={SignIn}/>
       </Switch>
-    </main>
+    </Main>
   );
 }
 
 export default Routes;
+
+const Main = styled.main`
+  display: flex;
+  flex: 1;
+`;

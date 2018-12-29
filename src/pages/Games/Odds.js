@@ -19,7 +19,9 @@ class Odds extends React.Component {
           const odds = get(data, ['odds']);
           if (!odds) return <div>Loading....</div>;
           return (
-            <OddsTable odds={odds} />
+            <Wrapper>
+              <OddsTable odds={odds} />
+            </Wrapper>
           );
         }}
       </Query>
@@ -28,3 +30,19 @@ class Odds extends React.Component {
 }
 
 export default Odds;
+
+const Wrapper = styled.div`
+  flex: 1;
+`;
+
+const Item = styled.div`
+  background: darkorange;
+  text-align: center;
+  padding: 50px;
+  color: white;
+`
+function CarouselItem(props) {
+  return (
+    <Item>Item {props.index} of {props.numSlides}</Item>
+  )
+}

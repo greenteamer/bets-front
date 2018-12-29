@@ -1,6 +1,8 @@
 import { ROLES } from '../constants';
 import { map } from 'lodash';
 
+export { media, sizes, Default, Desktop, Tablet, Mobile } from './css';
+
 
 export const getAccessByRoles = (me, rolesList) => {
   if (!me) return false;

@@ -64,8 +64,8 @@ class ButtonForm extends React.Component {
                   />
                 </Field>
                 <Group marginTop={8}>
-                  <Button secondary onClick={this.handleOnSuccess(popover)}>Ok</Button>
-                  <Button onClick={this.handleOnCancel(popover)}>Cancel</Button>
+                  <Button palette="secondary" onClick={this.handleOnSuccess(popover)}>Ok</Button>
+                  <Button palette="transparent" onClick={this.handleOnCancel(popover)}>Cancel</Button>
                 </Group>
               </Block>
             </Popover>

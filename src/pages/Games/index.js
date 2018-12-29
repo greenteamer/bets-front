@@ -3,7 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import { Query } from 'react-apollo';
 import { get, groupBy, map } from 'lodash';
 import { Block, Flex, Grid, withTheme } from 'reakit';
-import Slider from 'react-styled-carousel';
+// import Slider from 'react-styled-carousel';
 
 
 import { GET_SPORTS } from '../../graphql/queries';
